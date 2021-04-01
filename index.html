@@ -1,26 +1,97 @@
 <!-- =================================
-Simple Greeting Dashboard
+Simple Dashboard
 ================================= //-->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Simple Greeting Dashboard</title>
+  <meta charset="UTF-8">
+  <title>PRIVACY PANDA Dashboard</title>
+  <!-- <link rel="stylesheet" href="mystyle.css"> -->
   <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <!-- Source from W3School -->
+  <style>
+    body {
+      background-color: whitesmoke;
+      opacity: 0.7;
+    }
+
+    h1 {
+      background-color: black;
+      font-family: "Lucida Console", "Courier New", monospace;
+      color: whitesmoke;
+    }
+
+    /*This is if we want the icon to be the background, scaling is issue */
+    /* body {
+      background-image: url('icon.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      /* background-size: cover; */
+    /* background-size: 100% 100%;
+    } */
+  </style>
 </head>
 
 <body>
-  <!-- My code will go here -->
-  <h1>Your Dashboard</h1>
-  <script src="main.js"></script>
-  <button id="settings-button">Settings</button>
-  <div class="settings" id="settings">
+  <h1 style="text-align: center">Welcome to Your Dashboard!</h1>
+  <img src="full_icon.png" alt="logo" class="center" width="100" height="80">
+
+  <!-- <form action="/TODOapp/" method="post">{% csrf_token %}
+    <input type="submit" value="Go to my browsing history">
+  </form>
+  <form action="/accounts/logout" method="post">{% csrf_token %}
+    <input type="submit" value="Learn about privacy policies for common websites">
+  </form> -->
+  <h2 style="text-align: center">You are logged in as [insert name w auth]</h2>
+  <button id="logout button" class="center">Logout</button>
+  <button id="settings-button" class="center">Privacy Panda Settings</button>
+  <!-- <div class="settings" id="settings">
     <form class="name-form" id="name-form" action="#">
       <input class="name-input" type="text" id="name-input" placeholder="Type your name here...">
       <button type="submit" class="name-button">Add</button>
     </form>
+  </div> -->
+
+  <div style=" margin:100px;">
+    <h1>Your Website History </h1>
+    <table style="width:100%">
+      <tr>
+        <th>Website</th>
+        <th>Date Accessed</th>
+        <th>Consented?</th>
+        <th>Consent Email</th>
+        <th>Consent Date</th>
+        <th>What Info is Collected?</th>
+      </tr>
+      <tr>
+        <td>ex_youtube.com
+        </td>
+        <td>04/01/21</td>
+        <td>
+          Yes
+          <a href="/options.html" class="redirect">Revoke Consent</a>
+        </td>
+        <td>ppanda@yay</td>
+        <td>04/01/21</td>
+        <td> Name, address, behavior, ...
+          <a href="/InfoCollected.html" class="redirect">Learn More</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="height:300px; margin:100px;">
+    <h1>About Privacy Panda </h1>
+    <p style="line-height: 2.0; font-size:20px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et magnis dis parturient montes
+      nascetur ridiculus mus. Purus semper eget duis at tellus at urna condimentum mattis. Turpis in eu mi
+      bibendum neque egestas. Rhoncus dolor purus non enim praesent elementum facilisis. Ipsum nunc aliquet
+      bibendum enim facilisis gravida. Cursus turpis sa tincidunt dui ut ornare lectus. Enim nec dui nunc
+      mattis enim ut. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Tussa
+      ultricies mi quis hendrerit dolor magna. Elit eget gravida cum sociis natoque penatibus et magnis
+      dis. Enim tortor at auctor urna nunc id cursus metus.</p>
+    <p style="line-height: 2.0; font-size:20px;">Email us at <a
+        href="mailto:ppanda@SampleEmail.com">ppanda@SampleEmail.com </a></p>
   </div>
 </body>
-
-</html>

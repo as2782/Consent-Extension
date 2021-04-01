@@ -7,9 +7,6 @@
     "128": "./icon.png",
     "128": "./full_icon.png"
   },
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
   "incognito": "split",
   "background": {
     "_comment1": "these are the scripts to run",
