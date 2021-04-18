@@ -5,10 +5,22 @@
 //   return lst;
 // }
 
-chrome.storage.local.get('title_list', function (result) {
-  var lst = result.title_list;
-  document.write(lst)
-  // alert('result.peek() ' + result.title_list.length)
+chrome.storage.local.get('browse_info', function (result) {
+  var lst = result.browse_info;
+  // document.getElementById("table").innerHTML = result.browse_info['extensions'];
+  let table_ref = document.getElementById("table");
+  for (const key in lst) {
+  	let new_row = table_ref.insertRow(-1);
+
+  	let new_cell = new_row.insertCell(0);
+  	let cell_date = new_row.insertCell(1);
+
+  	let new_text = document.createTextNode(key);
+  	let text_date = document.createTextNode(lst[key]);
+
+  	new_cell.appendChild(new_text);
+  	cell_date.appendChild(text_date);
+  }
 });
 
 // chrome.storage.local.get('title_list', function (result) {
