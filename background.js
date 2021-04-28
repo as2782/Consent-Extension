@@ -1,12 +1,12 @@
 // The object that will be stored in local storage
 // It will contain websites visited and dates of visit
 var all_lst = {};
-
+var titles = {};
 // This listens on every time a page is updated (refreshed or changed)
 // Does not listen on whether a tab or browser is first opened
 chrome.tabs.onUpdated.addListener(tab => {
   // This line looks at the active window
-  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     // console.log(tabs[0].title); // just a test; .title can be used for watch words later
     // Looks like tabs[0] looks at the tab with tab id 0, which is the active tab
     let url = tabs[0].url;
@@ -19,6 +19,8 @@ chrome.tabs.onUpdated.addListener(tab => {
 
     // When any update happens, if a url exists, we take the current date and time
     // But only if the url is not for the extension itself, the extensions page, or a newly opened tab
+    // update means: someone refreshes OR clicks on something on the page OR 
+    // makes a search
     if (domain == chrome.runtime.id | domain == "newtab" | domain == "extensions") {
       // do nothing
     }
@@ -47,8 +49,13 @@ chrome.tabs.onUpdated.addListener(tab => {
         // }
 
         // Adding the website and date info to local storage
-        chrome.storage.local.set({'browse_info': all_lst}, function() {
+        chrome.storage.local.set({ 'browse_info': all_lst }, function () {
           // empty function call
+        });
+        // Adding the website title to local storage to match against watch words
+        titles.hasOwnProperty(tabs[0].title);
+        chrome.storage.local.set({ 'title': titles }, function () {
+          // empty function call 
         });
       }
     }

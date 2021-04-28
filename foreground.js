@@ -1,14 +1,11 @@
-// console.log('from foreground')
+//***This file is not actively used in the extension, if we wanted to inject css at
+//some point then it would look like the example below. Keeping the file for 
+// future reference
+
+
 const first = document.createElement('button');
 first.innerText = "SET DATA";
 first.id = "first";
-
-// const second = document.createElement('button');
-// second.innerText = "SHOUTOUT";
-// second.id = "second";
-
-// document.querySelector('body').appendChild(first)
-// document.querySelector('body').appendChild(second)
 
 document.querySelector('body').appendChild(first);
 
