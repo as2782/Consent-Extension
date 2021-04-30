@@ -1,7 +1,24 @@
 // The object that will be stored in local storage
 // It will contain websites visited and dates of visit
 var all_lst = {};
+
+
+// The below will ensure that previous browsing history is not overwritten
+// after ending and starting a new browsing session
+try {
+  chrome.storage.local.get('browse_info', function (result) {
+    let obj = result.browse_info;
+    all_lst = obj;
+  });
+}
+catch(error) {
+  // pass - do nothing here
+}
+
+
 var titles = {};
+
+
 // This listens on every time a page is updated (refreshed or changed)
 // Does not listen on whether a tab or browser is first opened
 chrome.tabs.onUpdated.addListener(tab => {
