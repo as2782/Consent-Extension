@@ -33,10 +33,10 @@ const dummy = {
   }
 }
 // const coppa_policies = require('./coppa_policies.json');
-fetch("./employees.json")
-  .then(response => {
-    return response.json();
-  })
+// fetch("./employees.json")
+//   .then(response => {
+//     return response.json();
+//   })
 
 // list of alert words to check the titles against
 var alerts = ["porn", "drug", "weed", "pot", "suicide", "Drug", "sex", "cannabis",
