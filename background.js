@@ -51,19 +51,7 @@ chrome.tabs.onUpdated.addListener(tab => {
         // Converting the Date object to a string so it can be displayed properly
         all_lst[domain] = String(date);
 
-        // There is a bug where storage is overwritten after extension updates
-        // The below code is attempting to fix this.
 
-        // try {
-        //   chrome.storage.local.get('browse_info', function (result) {
-        //     let obj = result.browse_info;
-        //     let merged = Object.assign(result, all_lst);
-        //     all_lst = merged;
-        //   });
-        // }
-        // catch(err) {
-        //   // pass - do nothing here
-        // }
 
         // Adding the website and date info to local storage
         chrome.storage.local.set({ 'browse_info': all_lst }, function () {
