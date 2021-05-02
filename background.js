@@ -43,8 +43,14 @@ chrome.tabs.onUpdated.addListener(tab => {
     }
     else if (url) {
       let date = new Date();
-      // Converting date to mm/dd/yy
-      date = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      // Converting date to mm/dd/yy hh:mm
+      // any variable using slice() below is having a leading 0 added when needed
+      let date_month = ('0' + String(date.getMonth() + 1)).slice(-2)
+      let date_day = ('0' + String(date.getDate())).slice(-2)
+      let date_year = String(date.getFullYear())
+      let date_hour = String(date.getHours())
+      let date_mins = ('0' + String(date.getMinutes())).slice(-2)
+      date =  date_month + '/' + date_day + '/' + date_year + ', ' + date_hour + ':' + date_mins;
       // Checking if this site has already been accessed before
       // If it has, we do not add it to the object that has all accessed domains
       if (!(all_lst.hasOwnProperty(domain))) {

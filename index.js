@@ -58,6 +58,15 @@ chrome.storage.local.get('browse_info', function (result) {
   chrome.storage.local.get('title', function (result2) {
     var title_lst = result2.title;
     var lst = result.browse_info;
+
+    // This section adds browsing history to a list, to sort by time accessed
+    var sort_lst = []
+    for (obj in lst){
+      sort_lst.push([lst[obj], obj])
+    }
+    sort_lst.sort()
+    //console.log(sort_lst)
+
     // In index.html, the table has id "table". 
     // The code below creates new rows there.
     let table_ref = document.getElementById("table");
