@@ -23,7 +23,6 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "storage",
-    "https://www.google.com/*"
+    "storage"
   ]
 }
