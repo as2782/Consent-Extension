@@ -3,8 +3,8 @@
 var all_lst = {};
 
 
-The below will ensure that previous browsing history is not overwritten
-after ending and starting a new browsing session
+// The below will ensure that previous browsing history is not overwritten
+// after ending and starting a new browsing session
 try {
   chrome.storage.local.get('browse_info', function (result) {
     let obj = result.browse_info;
