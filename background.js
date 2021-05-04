@@ -26,11 +26,10 @@ chrome.tabs.onUpdated.addListener(tab => {
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
     // console.log(tabs[0].title); // just a test; .title can be used for watch words later
     // Looks like tabs[0] looks at the tab with tab id 0, which is the active tab
-    let url = tabs[0].url;
-    let curr_title = tabs[0].title;
     // The previous line takes the whole url. The next lines convert it to a URL object
     // And truncates the object to just to 'www.domain.whatever'
     // In instances where 'www' or '.whatever' is missing, just returns 'domain'
+    let url = tabs[0].url;
     let domain = new URL(url);
     domain = domain.hostname;
     // date formatting
@@ -52,20 +51,12 @@ chrome.tabs.onUpdated.addListener(tab => {
       // do nothing, same logic as with url below
     }
     else {
-      // Checking if this site has already been accessed before
-      // If it has, we do not add it to the object that has all accessed domains
-      // console.log("title beginning of else: " + curr_title);
-      if (!(all_lst.hasOwnProperty(domain))) {
-        // Converting the Date object to a string so it can be displayed properly
-        all_lst[domain] = String(date);
+      // exclude searches
+      if (!(tabs[0].url).includes("duckduckgo")) {
+        let url = tabs[0].url;
+        let curr_title = tabs[0].title;
         // adding date to the list of titles
-        console.log("added " + curr_title + " to list of titles ");
         titles[curr_title] = String(date);
-        // Adding the website and date info to local storage
-        chrome.storage.local.set({ 'browse_info': all_lst }, function () {
-          // empty function call
-          console.log("url is " + url);
-        });
         // Adding the website and date info to local storage only if it's not the urls
         if (!(curr_title.includes("http"))) {
           chrome.storage.local.set({ 'title': titles }, function () {
@@ -73,7 +64,20 @@ chrome.tabs.onUpdated.addListener(tab => {
             console.log("title in storage " + curr_title);
           });
         }
+        // Checking if this site has already been accessed before
+        // If it has, we do not add it to the object that has all accessed domains
+        // console.log("title beginning of else: " + curr_title);
+        if (!(all_lst.hasOwnProperty(domain))) {
+          // Converting the Date object to a string so it can be displayed properly
+          all_lst[domain] = String(date);
+          // Adding the website and date info to local storage
+          chrome.storage.local.set({ 'browse_info': all_lst }, function () {
+            // empty function call
+            console.log("url is " + url);
+          });
+        }
       }
+
     }
   });
 });

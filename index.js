@@ -1,3 +1,5 @@
+//**Index.js interacts with index.html to display the information from storage in the html tables*/
+
 // Hardcoding the list of websites and privacy policy information for now. 
 // Calling it 'dummy'. Will pull from server in final implementation
 const dummy = {
@@ -42,7 +44,8 @@ const dummy = {
 var alerts = ["Porn", "Drug", "Weed", "Pot", "Suicide", "Drugs", "Sex", "Cannabis",
   "Hashish", "Hemp", "Herb", "Tea", "Help", "Ganja", "Hash", "Joint", "Reefer",
   "Doobie", "Loco Weed", "Porno", "Raunchy", "Steamy", "Sexy", "X-Rated", "xxx", "XXX", "Suicidal",
-  "Self Mutilation", "Self-Mutilation", "Guns", "QAnon", "qanon", "Qanon", "Self-Injury", "marijuana"];
+  "Self Mutilation", "Self-Mutilation", "Guns", "QAnon", "qanon", "Qanon", "Self-Injury",
+  "marijuana", "weed"];
 
 // Will use the fetch api to pull info from server.
 // Code is commented out, but will be the following:
