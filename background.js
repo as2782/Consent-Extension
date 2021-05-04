@@ -3,8 +3,8 @@
 var all_lst = {};
 
 
-// The below will ensure that previous browsing history is not overwritten
-// after ending and starting a new browsing session
+The below will ensure that previous browsing history is not overwritten
+after ending and starting a new browsing session
 try {
   chrome.storage.local.get('browse_info', function (result) {
     let obj = result.browse_info;
@@ -48,7 +48,7 @@ chrome.tabs.onUpdated.addListener(tab => {
       let date_month = ('0' + String(date.getMonth() + 1)).slice(-2)
       let date_day = ('0' + String(date.getDate())).slice(-2)
       let date_year = String(date.getFullYear())
-      let date_hour = String(date.getHours())
+      let date_hour = ('0' + String(date.getHours())).slice(-2)
       let date_mins = ('0' + String(date.getMinutes())).slice(-2)
       date =  date_month + '/' + date_day + '/' + date_year + ', ' + date_hour + ':' + date_mins;
       // Checking if this site has already been accessed before
