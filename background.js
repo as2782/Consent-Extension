@@ -1,6 +1,7 @@
 /* Some code related to how to use Google login with Chrome Extensions is from:
 https://github.com/an-object-is-a/google-openid-connect-chrome-extension/blob/master/background.js
 */
+
 // The object that will be stored in local storage
 // It will contain websites visited and dates of visit
 var all_lst = {};
@@ -82,20 +83,32 @@ chrome.tabs.onUpdated.addListener(tab => {
   });
 });
 
-
+/* 
+Source from: https://github.com/an-object-is-a/google-openid-connect-chrome-extension/
+Author: an-object-is-a
+The code below is for Authentication with OAuth2. OAuth2 is the industry-standard protocol for authorization.
+*/
+// get client id from google cloud platform
 const CLIENT_ID = encodeURIComponent('347250747253-foraleeguhfi6firnbdmnui92on325ig.apps.googleusercontent.com');
+// define the response type as id_token
 const RESPONSE_TYPE = encodeURIComponent('id_token');
+// the URI is the id_of_extension.chromiumapp.org
 const REDIRECT_URI = encodeURIComponent('https://hblldpopcbinajlabijfdmongpamgame.chromiumapp.org')
+// the scope is openid
 const SCOPE = encodeURIComponent('openid');
 const STATE = encodeURIComponent('amao');
+// prompt is consent
 const PROMPT = encodeURIComponent('consent');
 
+// When the extension starts, the user status is not signed in, so define it false here.
 let user_signed_in = false;
 
+// function that check the status.
 function is_user_signed_in() {
   return user_signed_in;
 }
 
+// function to create authentication endpoint using the consts above.
 function create_auth_endpoint() {
   let nonce = encodeURIComponent(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
 
@@ -112,10 +125,11 @@ function create_auth_endpoint() {
   return openId_endpoint_url;
 }
 
+// add a listener when receiving request from user, give response to let user login/logout
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'login') {
     if (user_signed_in) {
-      console.log("User is already signed in.");
+      console.log("User is already signed in."); // check the user is already signed in.
     } else {
       chrome.identity.launchWebAuthFlow({
         'url': create_auth_endpoint(),
@@ -124,34 +138,32 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (chrome.runtime.lastError) {
           // problem signing in
         } else {
-          let id_token = redirect_url.substring(redirect_url.indexOf('id_token=') + 9);
+          let id_token = redirect_url.substring(redirect_url.indexOf('id_token=') + 9); // get the id token by substring the url
           id_token = id_token.substring(0, id_token.indexOf('&'));
-          const user_info = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(id_token.split(".")[1]));
+          const user_info = KJUR.jws.JWS.readSafeJSONString(b64utoutf8(id_token.split(".")[1])); // get the user info by read the json string
 
-          if ((user_info.iss === 'https://accounts.google.com' || user_info.iss === 'accounts.google.com')
+          if ((user_info.iss === 'https://accounts.google.com' || user_info.iss === 'accounts.google.com') // check user_info
             && user_info.aud === CLIENT_ID) {
             console.log("User successfully signed in.");
-            user_signed_in = true;
+            user_signed_in = true; //now the user status is signed in.
             chrome.browserAction.setPopup({ popup: './popup-signed-in.html' }, () => {
-              sendResponse('success');
+              sendResponse('success'); // pop-up the signed-in html
             });
           } else {
             // invalid credentials
-            console.log("Invalid credentials.");
+            console.log("Invalid credentials."); // error handling
           }
         }
       });
 
       return true;
     }
-  } else if (request.message === 'logout') {
-    user_signed_in = false;
+  } else if (request.message === 'logout') { // when receiving request "logout"
+    user_signed_in = false; // now the user status is signed out.
     chrome.browserAction.setPopup({ popup: './popup.html' }, () => {
-      sendResponse('success');
+      sendResponse('success'); // pop up the html for user to sign in
     });
 
     return true;
-  } else if (request.message === 'isUserSignedIn') {
-    sendResponse(is_user_signed_in());
-  }
+  } 
 });
