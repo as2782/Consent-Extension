@@ -76,18 +76,26 @@ function print_table(array, obj, table) {
 
     if (obj[info_site] == undefined) {
       var text_clause = document.createTextNode("Not Found");
-      var text_link = document.createTextNode("Not Found");
+      var text_link = document.createTextNode(" ");
+      cell_link.appendChild(text_link);
     }
     else {
       var text_clause = document.createTextNode(obj[info_site]["clauses"]);
-      var text_link = document.createTextNode(obj[info_site]["start_url"]);
+      // var text_link = document.createTextNode(obj[info_site]["start_url"]);
+      // make the privacy policy link a link 
+      var a = document.createElement('a');
+      var linkText = document.createTextNode(obj[info_site]["start_url"]);
+      a.appendChild(linkText);
+      a.title = obj[info_site]["start_url"];
+      a.href = obj[info_site]["start_url"];
+      cell_link.appendChild(a);
     }
 
     // Add Text to new cells
     cell_site.appendChild(text_site);
     cell_date.appendChild(text_date);
     cell_clause.appendChild(text_clause);
-    cell_link.appendChild(text_link);
+    // cell_link.appendChild(text_link);
   }
 }
 
@@ -102,14 +110,14 @@ chrome.storage.local.get('browse_info', function (result) {
   for (obj in lst) {
     sort_lst.push([lst[obj], obj])
   }
-    sort_lst.sort()
+  sort_lst.sort()
 
-    // In index.html, the table has id "table". 
-    // The code below creates new rows there.
-    let table_ref = document.getElementById("table");
+  // In index.html, the table has id "table". 
+  // The code below creates new rows there.
+  let table_ref = document.getElementById("table");
 
 
-    fetch(fetch_file)
+  fetch(fetch_file)
     .then(response => response.json())
     .then(data => print_table(sort_lst, data, table_ref))
 
