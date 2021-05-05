@@ -76,7 +76,7 @@ function print_table(array, obj, table) {
 
     if (obj[info_site] == undefined) {
       var text_clause = document.createTextNode("Not Found");
-      var text_link = document.createTextNode("Not Found");
+      var text_link = document.createTextNode("");
     }
     else {
       var text_clause = document.createTextNode(obj[info_site]["clauses"]);
