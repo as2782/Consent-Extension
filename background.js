@@ -12,15 +12,15 @@ var all_lst = {};
 // so it is commented out
 
 
-// try {
-//   chrome.storage.local.get('browse_info', function (result) {
-//     let obj = result.browse_info;
-//     all_lst = obj;
-//   });
-// }
-// catch (error) {
-//   // pass - do nothing here
-// }
+try {
+  chrome.storage.local.get('browse_info', function (result) {
+    let obj = result.browse_info;
+    all_lst = obj;
+  });
+}
+catch (error) {
+  // pass - do nothing here
+}
 
 var titles = {};
 

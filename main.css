@@ -34,3 +34,6 @@ table {
 .spacer {
   height: 50px;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
