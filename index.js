@@ -44,6 +44,7 @@ var alerts = ["Porn", "Drug", "Weed", "Pot", "Suicide", "Drugs", "Sex", "Cannabi
   "marijuana", "weed"];
 
 // Will use the fetch api to pull info from server.
+// This is the file to be used in the fetch later
 var fetch_file = "https://privacypandapolicies.s3.us-east-2.amazonaws.com/coppa_policies_converted.json"
 
 // This function takes in an array, an object, and a table reference
